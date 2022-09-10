@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = "/api/users";
+// here it will be running on http://localhost:3000/api/users but we want to run on http://localhost:5000 alternatively we can set the proxy in package.json
 
 // Register user
 const register = async (userData) => {
