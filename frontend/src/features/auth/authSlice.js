@@ -36,7 +36,15 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    //Need to create a reset so in order to go back to default state for eg isSuccess needs to go back to false
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     // here we handle the cases(pending, fulfilled , rejected etc)
     builder
@@ -57,4 +65,5 @@ export const authSlice = createSlice({
   },
 });
 
+export const { reset } = authSlice.actions;
 export default authSlice.reducer;
