@@ -20,7 +20,7 @@ function Register() {
   };
 
   const onSubmit = (e) => {
-    email.preventDefault();
+    e.preventDefault();
 
     if (password !== passwordConfirm) {
       toast.error("Passwords do not match");
