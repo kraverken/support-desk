@@ -69,7 +69,10 @@ export const authSlice = createSlice({
         state.isError = true;
         state.user = null;
         state.message = action.payload; // rejectwithvalue will be the payload here
-      });
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
+      }); // to remove the login from the state
   },
 });
 
