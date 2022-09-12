@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ticketService from "./ticketService";
 
-const initalState = {
+const initialState = {
   tickets: [],
   ticket: {},
   isError: false,
@@ -12,9 +12,9 @@ const initalState = {
 
 export const ticketSlice = createSlice({
   name: "ticket",
-  initalState,
+  initialState,
   reducers: {
-    reset: (state) => initalState,
+    reset: (state) => initialState,
   },
   extraReducers: (builder) => {},
 });
