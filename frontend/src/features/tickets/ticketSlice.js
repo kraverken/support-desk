@@ -11,7 +11,7 @@ const initialState = {
 };
 
 // Create new Ticket
-export const register = createAsyncThunk(
+export const createTicket = createAsyncThunk(
   "tickets/create",
   async (ticketData, thunkAPI) => {
     try {
