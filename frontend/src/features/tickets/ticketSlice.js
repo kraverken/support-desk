@@ -51,14 +51,14 @@ export const getTickets = createAsyncThunk(
   }
 );
 
-// get user Ticket
+// Get user ticket
 export const getTicket = createAsyncThunk(
   "tickets/get",
   async (ticketId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
       // here we need the bearer token for authorization and using thunkAPI we can access any state so we access the token in user in auth state
-      return await ticketService.getTickets(ticketId, token);
+      return await ticketService.getTicket(ticketId, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -102,6 +102,19 @@ export const ticketSlice = createSlice({
       })
       .addCase(getTickets.rejected, (state, action) => {
         state.isLoading = true;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getTicket.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getTicket.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.ticket = action.payload;
+      })
+      .addCase(getTicket.rejected, (state, action) => {
+        state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       });

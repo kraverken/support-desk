@@ -28,7 +28,7 @@ const getTickets = async (token) => {
   return response.data;
 };
 
-// get ticket
+// Get user ticket
 const getTicket = async (ticketId, token) => {
   const config = {
     headers: {
