@@ -7,6 +7,7 @@ import { getTicket, closeTicket } from "../features/tickets/ticketSlice";
 import {
   getNotes,
   createNote,
+  // eslint-disable-next-line
   reset as notesReset,
 } from "../features/notes/noteSlice";
 import { useParams, useNavigate } from "react-router-dom";
@@ -33,6 +34,7 @@ function Ticket() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [noteText, setNoteText] = useState("");
 
+  // eslint-disable-next-line
   const { ticket, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.ticket
   );
@@ -41,7 +43,6 @@ function Ticket() {
     (state) => state.notes
   );
 
-  const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { ticketId } = useParams();
