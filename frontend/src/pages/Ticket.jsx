@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
+import { FaPlus } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { getTicket, closeTicket } from "../features/tickets/ticketSlice";
 import { getNotes, reset as notesReset } from "../features/notes/noteSlice";
@@ -49,6 +50,28 @@ function Ticket() {
     navigate("/tickets");
   };
 
+  // openModal
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  // closeModal
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  // onNoteSubmit
+  const onNoteSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submit");
+    closeModal();
+  };
+
+  // handleChange
+  const handleChange = (e) => {
+    setNoteText(e.target.value);
+  };
+
   useEffect(() => {
     if (isError) {
       toast.error(message);
@@ -87,6 +110,42 @@ function Ticket() {
         </div>
         <h2>Notes</h2>
       </header>
+      {ticket.status !== "closed" && (
+        <button className="btn" onClick={openModal}>
+          <FaPlus />
+          Add Note
+        </button>
+      )}
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Add Note"
+      >
+        <h2>Add Note</h2>
+        <button className="btn-close" onClick={closeModal}>
+          X
+        </button>
+        <form onSubmit={onNoteSubmit}>
+          <div className="form-group">
+            <textarea
+              onChange={handleChange}
+              name="noteText"
+              id="noteText"
+              className="form-control"
+              placeholder="Note text"
+              value={noteText}
+            ></textarea>
+          </div>
+          <div className="form-group">
+            <button className="btn" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      </Modal>
+
       {notes.map((note) => (
         <NoteItem key={note._id} note={note} />
       ))}
